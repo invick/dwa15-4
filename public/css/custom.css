@@ -1,3 +1,15 @@
 .panel-heading span {
     font-size: 130%;
 }
+
+.tasks-list {
+    padding-top: 25px;
+}
+
+.uncompleted {
+    font-weight: bold;
+}
+
+.completed {
+    text-decoration:line-through
+}

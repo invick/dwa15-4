@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Task;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -14,8 +15,9 @@ class TaskController extends Controller
      */
     public function index()
     {
+        $tasks = Auth::user()->tasks()->orderBy('completed', 'asc')->get();
         return view('tasks.list', [
-            'tasks' => Auth::user()->tasks
+            'tasks' => $tasks
         ]);
     }
 
@@ -36,17 +38,6 @@ class TaskController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
-    {
-        //
-    }
-
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
     {
         //
     }
@@ -83,5 +74,21 @@ class TaskController extends Controller
     public function destroy($id)
     {
         //
+    }
+
+    public function markAsDone($id)
+    {
+        Task::findOrFail($id)->update([
+           'completed' => true
+        ]);
+        return redirect()->back();
+    }
+
+    public function markAsUndone($id)
+    {
+        Task::findOrFail($id)->update([
+            'completed' => false
+        ]);
+        return redirect()->back();
     }
 }
