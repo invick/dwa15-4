@@ -5,9 +5,9 @@
     <div class="row">
         <div class="col-md-8 col-md-offset-2 text-center">
             <br><br>
-            <h1>Welcome in task manager app!</h1>
+            <h1>Task Management Made Simple</h1>
             <br>
-            <p>Login or register to start working with tool</p>
+            <p>Login or register to get started</p>
         </div>
     </div>
 </div>
