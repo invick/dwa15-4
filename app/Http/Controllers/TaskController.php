@@ -100,7 +100,7 @@ class TaskController extends Controller
         Task::findOrFail($id)->update([
            'completed' => true
         ]);
-        return redirect()->back()->with('success','Task marked as done');
+        return redirect(route('tasks.index'))->with('success','Task marked as done');
     }
 
     public function markAsUndone($id)
@@ -108,6 +108,6 @@ class TaskController extends Controller
         Task::findOrFail($id)->update([
             'completed' => false
         ]);
-        return redirect()->back()->with('success','Task marked as undone');
+        return redirect(route('tasks.index'))->with('success','Task marked as undone');
     }
 }
