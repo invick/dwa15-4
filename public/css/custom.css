@@ -13,3 +13,7 @@
 .completed {
     text-decoration:line-through
 }
+
+.delete-form {
+    display: inline-block;
+}

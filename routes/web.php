@@ -15,7 +15,12 @@ Auth::routes();
 
 Route::get('/', 'HomeController@index')->name('home');
 
-Route::resource('tasks', 'TaskController',  ['except' => ['show']]);
+Route::group(['middleware' => ['auth']], function () {
 
-Route::get('tasks/{task}/mark-as-done', 'TaskController@markAsDone')->name('mark-as-done');
-Route::get('tasks/{task}/mark-as-undone', 'TaskController@markAsUndone')->name('mark-as-undone');
+    Route::resource('tasks', 'TaskController',  ['except' => ['show']]);
+    Route::get('tasks/{task}/mark-as-done', 'TaskController@markAsDone')->name('mark-as-done');
+    Route::get('tasks/{task}/mark-as-undone', 'TaskController@markAsUndone')->name('mark-as-undone');
+
+});
+
+

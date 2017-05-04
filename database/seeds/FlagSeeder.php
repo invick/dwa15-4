@@ -21,7 +21,35 @@ class FlagSeeder extends Seeder
         ]);
 
         Flag::create([
-            'name' => 'delayed',
+            'name' => 'today',
+        ]);
+
+        Flag::create([
+            'name' => 'this week',
+        ]);
+
+        Flag::create([
+            'name' => 'next week',
+        ]);
+
+        Flag::create([
+            'name' => 'this month',
+        ]);
+
+        Flag::create([
+            'name' => 'next month',
+        ]);
+
+        Flag::create([
+            'name' => 'work',
+        ]);
+
+        Flag::create([
+            'name' => 'home',
+        ]);
+
+        Flag::create([
+            'name' => 'school',
         ]);
     }
 }
