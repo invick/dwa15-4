@@ -11,30 +11,36 @@
                     </div>
                     <div class="panel-body tasks-list">
 
-                        @foreach($tasks as $task)
-                            <div class="row">
-                                <div class="col-xs-8 {{ $task->completed ? 'completed' : 'uncompleted' }}">
-                                    <span>{{ $task->title }}</span>
-                                    @foreach($task->flags as $flag)
-                                        <span class="label label-info">{{ $flag->name }}</span>
-                                    @endforeach
+                        @if(count($tasks))
+                            @foreach($tasks as $task)
+                                <div class="row">
+                                    <div class="col-xs-8 {{ $task->completed ? 'completed' : 'uncompleted' }}">
+                                        <span>{{ $task->title }}</span>
+                                        @foreach($task->flags as $flag)
+                                            <span class="label label-info">{{ $flag->name }}</span>
+                                        @endforeach
+                                    </div>
+                                    <div class="col-xs-4 text-right">
+                                        @if($task->completed == true)
+                                            <a href="{{ route('mark-as-undone', ['$task' => $task]) }}" class="btn btn-xs btn-warning">Undone</a>
+                                        @else
+                                            <a href="{{ route('mark-as-done', ['$task' => $task]) }}" class="btn btn-xs btn-success">Done</a>
+                                        @endif
+                                        <a href="{{ route('tasks.edit', ['$task' => $task]) }}" class="btn btn-xs btn-default">Show</a>
+                                        <form action="{{ route('tasks.destroy', ['$task' => $task]) }}" method="POST" class="delete-form">
+                                            <input type="hidden" name="_method" value="DELETE">
+                                            {{ csrf_field() }}
+                                            <button type="submit" class="btn btn-xs btn-danger">Delete</button>
+                                        </form>
+                                    </div>
                                 </div>
-                                <div class="col-xs-4 text-right">
-                                    @if($task->completed == true)
-                                        <a href="{{ route('mark-as-undone', ['$task' => $task]) }}" class="btn btn-xs btn-warning">Undone</a>
-                                    @else
-                                        <a href="{{ route('mark-as-done', ['$task' => $task]) }}" class="btn btn-xs btn-success">Done</a>
-                                    @endif
-                                    <a href="{{ route('tasks.edit', ['$task' => $task]) }}" class="btn btn-xs btn-default">Show</a>
-                                    <form action="{{ route('tasks.destroy', ['$task' => $task]) }}" method="POST" class="delete-form">
-                                        <input type="hidden" name="_method" value="DELETE">
-                                        {{ csrf_field() }}
-                                        <button type="submit" class="btn btn-xs btn-danger">Delete</button>
-                                    </form>
-                                </div>
-                            </div>
-                            <hr>
-                        @endforeach
+                                <hr>
+                            @endforeach
+                        @else
+
+                            <p class="text-center">No items</p>
+
+                        @endif
 
                     </div>
                 </div>
